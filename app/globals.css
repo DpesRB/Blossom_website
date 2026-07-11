@@ -851,3 +851,12 @@ html {
   color: white;
   padding: 10px;
 }
+
+.contact-link:hover {
+  transform: translateX(10px);
+  color: #fff !important;
+}
+.contact-link:hover div {
+  background: white !important;
+  color: black !important;
+}

@@ -167,6 +167,9 @@ export default function AdminDashboard() {
           <a href="/admin/slideshow" className="btn-light-pill" style={{ background: 'white', color: 'black' }}>
             Manage Slideshow
           </a>
+          <a href="/admin/messages" className="btn-light-pill" style={{ background: 'white', color: 'black' }}>
+  Inbox
+</a>
           <button onClick={handleLogout} className="btn-light-pill" style={{ background: 'transparent', color: 'white', border: '1px solid white' }}>
             Log Out
           </button>
