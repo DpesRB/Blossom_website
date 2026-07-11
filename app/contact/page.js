@@ -1,75 +1,3 @@
-/*"use client";
-
-import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
-
-export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
-
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("submitting");
-
-    const { error } = await supabase.from("inquiries").insert({
-      product_id: null,
-      customer_name: form.name,
-      phone: form.phone,
-      email: form.email || null,
-      message: form.message,
-    });
-
-    if (error) {
-      setStatus("error");
-    } else {
-      setStatus("success");
-      setForm({ name: "", phone: "", email: "", message: "" });
-    }
-  }
-
-  return (
-    <div className="page-container">
-      <h1>Contact Us</h1>
-      <p style={{ color: "#666", margin: "0.5rem 0 1.5rem" }}>
-        Have a question? Send us a message and we'll get back to you.
-      </p>
-
-      {status === "success" ? (
-        <p style={{ color: "#2a7a3f", fontWeight: 500 }}>
-          Message sent! We'll be in touch soon.
-        </p>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input id="name" name="name" value={form.name} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="phone">Phone</label>
-            <input id="phone" name="phone" value={form.phone} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email (optional)</label>
-            <input id="email" name="email" type="email" value={form.email} onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange} required />
-          </div>
-          <button type="submit" className="btn-primary" disabled={status === "submitting"}>
-            {status === "submitting" ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      )}
-    </div>
-  );
-}*/
-
-
 "use client";
 
 import { supabase } from "@/lib/supabaseClient";
@@ -104,78 +32,84 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="page-container fade-in">
-      <div className="contact-layout">
+    <div className="contact-layout fade-in">
+      
+      {/* Left Column: Text & Socials */}
+      <div className="contact-text">
+        <h1>Let's Connect</h1>
+        <p>
+          Whether you are looking for the perfect bridal wear, need help with sizing, 
+          or have a question about an existing order, our team is here to assist you.
+        </p>
         
-        {/* Left Column: Brand Text & Details */}
-        <div className="contact-text">
-          <h1>Get in Touch</h1>
-          <p>
-            Whether you are looking for the perfect bridal wear, need help with sizing, 
-            or have a question about an existing order, we are here to assist you.
-          </p>
-          
-          <div className="contact-details">
-            <div className="detail-item">
-              <strong>Email</strong>
-              <span>samagosain@gmail.com</span>
-            </div>
-            <div className="detail-item">
-              <strong>Phone</strong>
-              <span>+977 9765363678</span>
-            </div>
-            <div className="detail-item">
-              <strong>Hours</strong>
-              <span>24/7</span>
-            </div>
+        <div className="contact-details">
+          <div className="detail-item">
+            <strong>Email</strong>
+            <span style={{ color: "var(--text-secondary)" }}>samagosain@gmail.com</span>
+          </div>
+          <div className="detail-item">
+            <strong>Phone</strong>
+            <span style={{ color: "var(--text-secondary)" }}>+977 9765363678</span>
           </div>
         </div>
 
-        {/* Right Column: Form */}
-        <div className="contact-form-container">
-          {status === "success" ? (
-            <div className="success-state fade-in">
-              <h3>Thank You!</h3>
-              <p>Your message has been sent successfully. We will be in touch with you shortly.</p>
-              <button onClick={() => setStatus("idle")} className="btn-secondary">
-                Send Another Message
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input id="name" name="name" value={form.name} onChange={handleChange} required placeholder="Jane Doe" />
-              </div>
-              
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
-                  <input id="phone" name="phone" value={form.phone} onChange={handleChange} required placeholder="+977 ..." />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email Address (Optional)</label>
-                  <input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="jane@example.com" />
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="message">Your Message</label>
-                <textarea id="message" name="message" rows={5} value={form.message} onChange={handleChange} required placeholder="How can we help you?" />
-              </div>
-              
-              {status === "error" && (
-                <p className="error-message">Something went wrong. Please try again.</p>
-              )}
-              
-              <button type="submit" className="btn-primary form-submit-btn" disabled={status === "submitting"}>
-                {status === "submitting" ? "Sending..." : "Send Message"}
-              </button>
-            </form>
-          )}
+        {/* Social Media Links */}
+        <div className="social-links">
+          {/* Add your actual Instagram link in the href */}
+          <a href="https://www.instagram.com/blossom.np_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" className="social-pill">
+            Instagram ↗
+          </a>
+          {/* Add your actual TikTok link in the href */}
+          <a href="https://www.tiktok.com/@blossom_threads.np?_r=1&_t=ZS-97v8HhopNQ5" target="_blank" rel="noreferrer" className="social-pill">
+            TikTok ↗
+          </a>
         </div>
-        
       </div>
+
+      {/* Right Column: Dark Form */}
+      <div className="contact-form-container">
+        {status === "success" ? (
+          <div className="success-state fade-in" style={{ textAlign: 'center', padding: '2rem 0' }}>
+            <h3 style={{ color: '#4caf50', fontSize: '1.5rem', marginBottom: '1rem' }}>Message Sent!</h3>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>We will be in touch with you shortly.</p>
+            <button onClick={() => setStatus("idle")} className="btn-primary">
+              Send Another Message
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input id="name" name="name" value={form.name} onChange={handleChange} required placeholder="Falano Dhiskano" />
+            </div>
+            
+            <div className="form-grid">
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number</label>
+                <input id="phone" name="phone" value={form.phone} onChange={handleChange} required placeholder="+977 ..." />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email Address</label>
+                <input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="your.email@example.com" />
+              </div>
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="message">Your Message</label>
+              <textarea id="message" name="message" rows={5} value={form.message} onChange={handleChange} required placeholder="How can we help you?" />
+            </div>
+            
+            {status === "error" && (
+              <p style={{ color: '#ff5252', marginTop: '1rem' }}>Something went wrong. Please try again.</p>
+            )}
+            
+            <button type="submit" className="btn-primary form-submit-btn" disabled={status === "submitting"}>
+              {status === "submitting" ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        )}
+      </div>
+      
     </div>
   );
 }

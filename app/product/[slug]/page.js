@@ -1,78 +1,14 @@
-/*import { supabase } from "@/lib/supabaseClient";
-import { notFound } from "next/navigation";
-import InquiryForm from "@/components/InquiryForm";
-
-export const revalidate = 60;
-
-async function getProduct(slug) {
-  const { data, error } = await supabase
-    .from("products")
-    .select("*, product_images(*), categories(name)")
-    .eq("slug", slug)
-    .eq("is_active", true)
-    .single();
-
-  if (error || !data) return null;
-  return data;
-}
-
-export default async function ProductPage({ params }) {
-  const product = await getProduct(params.slug);
-  if (!product) notFound();
-
-  const images = product.product_images?.length
-    ? product.product_images
-    : [{ image_url: "/placeholder.png" }];
-
-  return (
-    <div className="page-container">
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-        <div>
-          <img
-            src={images[0].image_url}
-            alt={product.name}
-            style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
-          />
-        </div>
-        <div>
-          <h1>{product.name}</h1>
-          {product.categories?.name && (
-            <p style={{ color: "#888", marginTop: "0.25rem" }}>
-              {product.categories.name}
-            </p>
-          )}
-          <p style={{ margin: "1rem 0", fontSize: "1.3rem" }} className="price">
-            Rs. {product.discount_price || product.price}
-          </p>
-          <p style={{ lineHeight: 1.6, color: "#444" }}>{product.description}</p>
-
-          {product.sizes?.length > 0 && (
-            <p style={{ marginTop: "1rem" }}>
-              <strong>Sizes:</strong> {product.sizes.join(", ")}
-            </p>
-          )}
-          {product.colors?.length > 0 && (
-            <p>
-              <strong>Colors:</strong> {product.colors.join(", ")}
-            </p>
-          )}
-
-          <div style={{ marginTop: "2rem" }}>
-            <InquiryForm productId={product.id} productName={product.name} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}*/
-
 import InquiryForm from "@/components/InquiryForm";
 import { supabase } from "@/lib/supabaseClient";
+import { unstable_noStore as noStore } from "next/cache"; // Import cache buster
 import { notFound } from "next/navigation";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 async function getProduct(slug) {
+  noStore(); // Obliterate the cache for the individual product view
+  
   const { data, error } = await supabase
     .from("products")
     .select("*, product_images(*), categories(name)")
@@ -150,7 +86,6 @@ export default async function ProductPage({ params }) {
               </span>
             </div>
 
-            {/* Arrays in Supabase are easily mapped if they aren't empty */}
             {product.sizes && product.sizes.length > 0 && (
               <div className="meta-group">
                 <span className="meta-label">Sizes:</span> 
