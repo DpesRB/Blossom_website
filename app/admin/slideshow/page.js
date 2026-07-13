@@ -19,7 +19,7 @@ export default function SlideshowAdmin() {
 
   async function checkUserAndFetchData() {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return router.push("/admin/login");
+    if (!session) return router.push("/admin-login");
 
     const { data } = await supabase.from("hero_slides").select("*").order("created_at", { ascending: false });
     if (data) setSlides(data);
@@ -73,7 +73,7 @@ export default function SlideshowAdmin() {
       {/* Admin Navigation */}
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
         <Link href="/admin/dashboard" className="btn-light-pill" style={{ background: 'transparent', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}>&larr; Back to Inventory</Link>
-        <button onClick={async () => { await supabase.auth.signOut(); router.push("/admin/login"); }} className="btn-light-pill" style={{ background: 'transparent', color: 'white', border: '1px solid white', marginLeft: 'auto' }}>Log Out</button>
+        <button onClick={async () => { await supabase.auth.signOut(); router.push("/admin-login"); }} className="btn-light-pill" style={{ background: 'transparent', color: 'white', border: '1px solid white', marginLeft: 'auto' }}>Log Out</button>
       </div>
 
       <h1>Manage Slideshow</h1>

@@ -16,7 +16,7 @@ export default function AdminInbox() {
 
   async function fetchMessages() {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return router.push("/admin/login");
+    if (!session) return router.push("/admin-login");
 
     const { data } = await supabase
       .from("contact_messages")

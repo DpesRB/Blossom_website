@@ -28,7 +28,7 @@ export default function AdminDashboard() {
   async function checkUserAndFetchData() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
-      router.push("/admin/login");
+      router.push("/admin-login");
       return;
     }
     setSession(session);
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
 
   async function handleLogout() {
     await supabase.auth.signOut();
-    router.push("/admin/login");
+    router.push("/admin-login");
   }
 
  
