@@ -133,9 +133,22 @@ export default function AdminDashboard() {
         alert(`Storage Upload Failed: ${uploadError.message}`);
       } else {
         const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(fileName);
+
+        // --- THE FIX: WIPE OLD IMAGES BEFORE SAVING THE NEW ONE ---
+        if (editingId) {
+          const { error: deleteError } = await supabase
+            .from('product_images')
+            .delete()
+            .eq('product_id', productId);
+            
+          if (deleteError) console.error("Failed to clear old images:", deleteError);
+        }
+        // ----------------------------------------------------------
+
         const { error: linkError } = await supabase.from('product_images').insert({
           product_id: productId, image_url: publicUrl, is_primary: true
         });
+        
         if (linkError) alert(`Image link failed: ${linkError.message}`);
       }
     }
