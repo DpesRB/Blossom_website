@@ -247,7 +247,7 @@ export default function AdminDashboard() {
             
             <div className="form-group" style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.2)' }}>
               <label style={{ display: 'block', marginBottom: '0.5rem' }}>Product Image (Optional)</label>
-              <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} style={{ border: 'none', padding: '0' }} />
+              <input type="file" accept="image/jpeg, image/png, image/webp" onChange={(e) => setImageFile(e.target.files[0])} style={{ border: 'none', padding: '0' }} />
             </div>
 
             <div className="form-grid">
