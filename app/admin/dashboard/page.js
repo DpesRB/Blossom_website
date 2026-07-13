@@ -131,25 +131,33 @@ export default function AdminDashboard() {
 
       if (uploadError) {
         alert(`Storage Upload Failed: ${uploadError.message}`);
+        setLoading(false);
+        return;
       } else {
         const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(fileName);
 
-        // --- THE FIX: WIPE OLD IMAGES BEFORE SAVING THE NEW ONE ---
+        // --- STRICT FIX: Wipe old images and STOP if it fails ---
         if (editingId) {
           const { error: deleteError } = await supabase
             .from('product_images')
             .delete()
             .eq('product_id', productId);
             
-          if (deleteError) console.error("Failed to clear old images:", deleteError);
+          if (deleteError) {
+            alert(`Database Error: Could not clear old images. ${deleteError.message}`);
+            setLoading(false);
+            return; // ⛔ Stops the code so it never duplicates
+          }
         }
-        // ----------------------------------------------------------
+        // ---------------------------------------------------------
 
         const { error: linkError } = await supabase.from('product_images').insert({
           product_id: productId, image_url: publicUrl, is_primary: true
         });
         
-        if (linkError) alert(`Image link failed: ${linkError.message}`);
+        if (linkError) {
+          alert(`Image link failed: ${linkError.message}`);
+        }
       }
     }
     
