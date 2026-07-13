@@ -48,7 +48,10 @@ export default function Header() {
           Contact
         </Link>
       </nav>
-
+<div className="header-right">
+        <button className="icon-btn">🛒</button>
+        
+      </div>
       
     </header>
   );
@@ -56,8 +59,5 @@ export default function Header() {
 
 
 /*
- <div className="header-right">
-        <button className="icon-btn">🛒</button>
-        <Link href="/admin/login" className="text-link">Admin Login</Link>
-      </div> The Header component is a sticky navigation bar that includes links to Home, Shop, and Contact pages. It uses Next.js's usePathname hook to determine the current route and highlight the active link. Additionally, it listens for hash changes in the URL to manage the active state of the "Shop" link when navigating to the #collection section. The logo is clickable and resets the active state when clicked.
+  The Header component is a sticky navigation bar that includes links to Home, Shop, and Contact pages. It uses Next.js's usePathname hook to determine the current route and highlight the active link. Additionally, it listens for hash changes in the URL to manage the active state of the "Shop" link when navigating to the #collection section. The logo is clickable and resets the active state when clicked.
 */
